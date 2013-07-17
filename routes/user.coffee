@@ -1,10 +1,10 @@
-user = require('../models/user')
+user = require '../models/user'
 
 #
 # * GET users listing.
 #
 exports.list = (req, res) ->
-  res.send "respond with a resource"
+  res.send 'respond with a resource'
 
 exports.json_all = (req, res) ->
     user.find().exec (err, results) ->
@@ -15,11 +15,15 @@ exports.register_post = (req, res) ->
   # res.render "hi"
   console.log req.body
   new user(req.body).save (err) ->
-    if err then console.log 'ERROR'
-    else console.log 'yeaaah'
+    if err
+      console.log 'Error in register', err 
+      res.render 'register'
+    else
+      console.log 'Successful login'
+      res.redirect '/'
 
 exports.register_get = (req, res) ->
-  res.render "register"
+  res.render 'register'
 
 exports.login_post = (req, res) ->
   user.findOne email: req.body.email, (err, result) ->
@@ -34,5 +38,6 @@ exports.login_post = (req, res) ->
       res.redirect 'login'
 
 exports.login_get = (req, res) ->
-  console.log 'reached here'
-  res.render "login"
+  return res.render 'login' unless req.session.user_id
+  console.log 'Already logged in'
+  res.render 'index'
