@@ -2,7 +2,7 @@ module.exports = (grunt) ->
   grunt.initConfig
     concurrent:
       client:
-        tasks: ['coffee:client', 'copy:client', 'less:client']
+        tasks: ['newer:coffee:client', 'newer:copy:client', 'newer:less:client']
       watch:
         tasks: ['watch:client', 'nodemon:dev']
         options:
@@ -10,8 +10,9 @@ module.exports = (grunt) ->
     # if any of the client files change, should rerun concurrent:client
     watch:
       client:
-        files: ['client/**/*.coffee', 'client/**/*.less']
+        files: ['client/**/*']
         tasks: 'concurrent:client'
+
     coffee:
       client:
         expand: true
@@ -23,8 +24,9 @@ module.exports = (grunt) ->
       client:
         expand: true
         cwd: 'client/'
-        src: ['assets/**/*', 'templates/**/*']
+        src: ['templates/**/*', 'assets/**/*']
         dest: 'dist/'
+
     less:
       client:
         expand: true
@@ -57,4 +59,5 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-nodemon'
   grunt.loadNpmTasks 'grunt-contrib-less'
+  grunt.loadNpmTasks 'grunt-newer'
 
