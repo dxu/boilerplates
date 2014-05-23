@@ -1,5 +1,13 @@
 module.exports = (grunt) ->
   grunt.initConfig
+    concurrent:
+      client:
+        tasks: ['coffee:client', 'copy:client', 'less:client']
+      watch:
+        tasks: ['watch:client', 'nodemon:dev']
+        options:
+          logConcurrentOutput: true
+    # if any of the client files change, should rerun concurrent:client
     watch:
       client:
         files: ['client/**/*.coffee', 'client/**/*.less']
@@ -43,6 +51,7 @@ module.exports = (grunt) ->
           delay: 1000
           legacyWatch: true
 
+  grunt.loadNpmTasks 'grunt-concurrent'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-copy'
