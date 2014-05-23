@@ -1,6 +1,9 @@
 module.exports = (grunt) ->
   grunt.initConfig
-    watch: 'hi'
+    watch:
+      client:
+        files: ['client/**/*.coffee', 'client/**/*.less']
+        tasks: 'concurrent:client'
     coffee:
       client:
         expand: true
@@ -12,7 +15,7 @@ module.exports = (grunt) ->
       client:
         expand: true
         cwd: 'client/'
-        src: ['stylesheets/**/*', 'assets/**/*', 'templates/**/*']
+        src: ['assets/**/*', 'templates/**/*']
         dest: 'dist/'
     less:
       client:
@@ -39,8 +42,6 @@ module.exports = (grunt) ->
           watch: ['./server', './dist/templates']
           delay: 1000
           legacyWatch: true
-
-
 
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
