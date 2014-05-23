@@ -52,6 +52,8 @@ module.exports = (grunt) ->
           watch: ['./server', './dist/templates']
           delay: 1000
           legacyWatch: true
+    clean: ['dist/']
+
 
   grunt.loadNpmTasks 'grunt-concurrent'
   grunt.loadNpmTasks 'grunt-contrib-watch'
@@ -60,7 +62,9 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-nodemon'
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-newer'
+  grunt.loadNpmTasks 'grunt-contrib-clean'
 
 
+  grunt.registerTask 'build', ['copy:client', 'coffee:client', 'less:client']
   grunt.registerTask 'dev', 'concurrent:dev'
 
