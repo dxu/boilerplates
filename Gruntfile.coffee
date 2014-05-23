@@ -3,7 +3,7 @@ module.exports = (grunt) ->
     concurrent:
       client:
         tasks: ['newer:coffee:client', 'newer:copy:client', 'newer:less:client']
-      watch:
+      dev:
         tasks: ['watch:client', 'nodemon:dev']
         options:
           logConcurrentOutput: true
@@ -60,4 +60,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-nodemon'
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-newer'
+
+
+  grunt.registerTask 'dev', 'concurrent:dev'
 
