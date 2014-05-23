@@ -14,6 +14,13 @@ module.exports = (grunt) ->
         cwd: 'client/'
         src: ['stylesheets/**/*', 'assets/**/*', 'templates/**/*']
         dest: 'dist/'
+    less:
+      client:
+        expand: true
+        cwd: 'client/stylesheets'
+        src: '**/*.less'
+        dest: 'dist/stylesheets'
+        ext: '.css'
     nodemon:
       dev:
         script: 'server/app.coffee'
@@ -39,3 +46,5 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-nodemon'
+  grunt.loadNpmTasks 'grunt-contrib-less'
+
